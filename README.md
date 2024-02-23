@@ -15,3 +15,5 @@ This project addresses the integration of HTML with JavaScript by applying good 
 * Audio class
 * setInterval()
 * clearInterval()
+* Date class
+* toLocaleTimeString()

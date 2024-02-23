@@ -14,11 +14,13 @@ const startPauseBt = document.querySelector('#start-pause');
 const startPauseLabelBt = document.querySelector('#start-pause span');
 const startPauseIconBt = document.querySelector('.app__card-primary-butto-icon');
 
+const timer = document.querySelector('#timer');
+
 const audioPlay = new Audio('./sons/play.wav');
 const audioPause = new Audio('./sons/pause.mp3');
 const audioTimeOver = new Audio('./sons/beep.mp3');
 
-let timeInSeconds = 0;
+let timeInSeconds = 1500;
 let intervalId = null;
 
 focusMusicInput.addEventListener('change', () => {
@@ -29,21 +31,25 @@ focusMusicInput.addEventListener('change', () => {
 });
 
 focoBt.addEventListener('click', () => {
+    timeInSeconds = 1500;
     changeContext('foco');
     focoBt.classList.add('active');
 });
 
 curtoBt.addEventListener('click', () => {
+    timeInSeconds = 300;
     changeContext('descanso-curto');
     curtoBt.classList.add('active');
 });
 
 longoBt.addEventListener('click', () => {
+    timeInSeconds = 900;
     changeContext('descanso-longo');
     longoBt.classList.add('active');
 });
 
 function changeContext(context) {
+    showTimer();
     
     buttons.forEach(function(context) {
         context.classList.remove('active');
@@ -69,12 +75,13 @@ function changeContext(context) {
 
 const countdown = () => {
     if(timeInSeconds <= 0) {
-        //audioTimeOver.play();
+        audioTimeOver.play();
         alert('Time is over');
         reset();
         return;
     }
     timeInSeconds -= 1;
+    showTimer()
 }
 
 startPauseBt.addEventListener('click', startPause);
@@ -97,3 +104,11 @@ function reset() {
     startPauseIconBt.setAttribute('src', './imagens/play_arrow.png');
     intervalId = null;
 }
+
+function showTimer() {
+    const time = new Date(timeInSeconds * 1000);
+    const formattedTime = time.toLocaleTimeString('pt-br', {minute: '2-digit', second: '2-digit'});
+    timer.innerHTML = `${formattedTime}`;
+}
+
+showTimer();
