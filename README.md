@@ -9,3 +9,9 @@ This project addresses the integration of HTML with JavaScript by applying good 
 * querySelectorAll()
 * addEventListener()
 * setAttribute()
+* innerHTML
+* textContent
+* classList
+* Audio class
+* setInterval()
+* clearInterval()
